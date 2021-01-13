@@ -1,20 +1,18 @@
 import joblib
 import numpy as np
 import pandas as pd
-import seaborn as sns
 import xgboost as xgb
 from lightgbm import LGBMClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import auc, roc_curve
 from sklearn.model_selection import train_test_split
 
+import visualization
 from constants import *
 import datetime
 
-sns.set()
-
-clfLGBM = LGBMClassifier(n_estimators=200, nthread=-1, seed=42)
-clfLGBM2 = LGBMClassifier(n_estimators=180, nthread=-1, seed=42)
+clfLGBM = LGBMClassifier(n_estimators=150, nthread=-1, seed=42)
+clfLGBM2 = LGBMClassifier(n_estimators=100, nthread=-1, seed=42)
 clfXGB = xgb.XGBClassifier(min_child_weight=10.0, n_estimators=250, nthread=-1,
                            objective='binary:logistic',
                            max_depth=5,
@@ -61,7 +59,7 @@ def log(text):
 
 
 def printAcc(clf, name, x_test, y_test):
-    log("[" + name + "] Acc: " + str(scoring(clf, x_test, y_test)))
+    log("[" + name + "] Точность: " + str(scoring(clf, x_test, y_test)))
 
 
 def loadModels():
@@ -207,6 +205,14 @@ def fileMode():
 if __name__ == '__main__':
     if not loadModels():
         trainModels()
+
+    # visualization.rf_features(clfRand, pd.read_csv(pathToTrain))
+    # visualization.rf_buildTree(clfRand)
+    # visualization.lgbm_tree(clfLGBM)
+    # visualization.lgbm_features(clfLGBM)
+    # visualization.xgb_features(clfXGB)
+    # visualization.xgb_features(clfXGB2)
+    # visualization.xgb_tree(clfXGB)
 
     mode = str(input("[1] Файл\n[2] Ввод\nВыберите режим: "))
     if mode == "1":
