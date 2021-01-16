@@ -21,3 +21,4 @@ conda install -c anaconda pandas<br/>
 conda install -c anaconda seaborn<br/>
 conda install -c conda-forge xgboost<br/>
 conda install -c conda-forge lightgbm<br/>
+conda install -c anaconda ipython<br/>

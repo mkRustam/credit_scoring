@@ -6,7 +6,6 @@ import xgboost as xgb
 # Отображение корреляции между всеми колонками
 from IPython.core.display import display
 from sklearn.tree import export_graphviz
-import graphviz
 
 
 def data_heatmap(X):
